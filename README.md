@@ -1,7 +1,4 @@
-# fondo user platform
-
-### Description
-Connects startups to inverstors
+# fondo-users
 
 ## Project setup
 ```
@@ -26,6 +23,11 @@ yarn test:unit
 ### Run your end-to-end tests
 ```
 yarn test:e2e
+```
+
+### Lints and fixes files
+```
+yarn lint
 ```
 
 ### Customize configuration
