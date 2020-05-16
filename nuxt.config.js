@@ -1,6 +1,4 @@
-const config = require('dotenv').config()
-
-const baseURL = config.parsed.staging_base_url
+const baseURL = 'http://fondo-app-gh.herokuapp.com/api/v1'
 
 module.exports = {
   mode: 'spa',
