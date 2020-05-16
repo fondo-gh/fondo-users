@@ -1,3 +1,7 @@
+const config = require('dotenv').config()
+
+const baseURL = config.parsed.staging_base_url
+
 module.exports = {
   mode: 'spa',
   /*
@@ -62,16 +66,36 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/auth'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL
+  },
   /*
    ** Build configuration
    */
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: 'http://fondo-app-gh.herokuapp.com/api/v1/user/login',
+            method: 'post',
+            propertyName: 'data.token'
+          }
+          // logout: { url: '/user/logout', method: 'post' },
+          // user: { url: '/user/user', method: 'get', propertyName: 'data' }
+        },
+        tokenRequired: false,
+        tokenType: 'Bearer'
+      }
+    }
+  },
   build: {
     /*
      ** You can extend webpack config here

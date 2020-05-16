@@ -1,29 +1,80 @@
 <template>
-  <div class="login-content">
+  <div class="signup-content col-md-12">
     <div class="login-form-container col-md-12 ">
       <h4 class="norm-padding"><strong>SIGN UP</strong></h4>
+      <p v-if="error" class="error-box animated fadeIn">
+        <span>{{ error }}</span>
+      </p>
+
       <p class="norm-padding">Check your progress in securing an investment</p>
       <br />
-      <form>
+      <form @submit.prevent="register">
         <div class="col-md-12 form-input input-radio">
           <ul>
             <li>
-              <input type="radio" name="type" value="startup" />
-              <span for="startup">I am a startup</span><br />
+              <input
+                v-model="user_type_id"
+                type="radio"
+                name="type"
+                value="1"
+              />
+              <span for="startup">I have a startup</span><br />
             </li>
             <li>
-              <input type="radio" name="type" value="investor" />
+              <input
+                v-model="user_type_id"
+                type="radio"
+                name="type"
+                value="2"
+              />
               <span for="startup">I am an investor</span><br />
             </li>
           </ul>
         </div>
         <div class="col-md-12 form-input">
+          <label for="first name">First Name</label>
+          <base-input
+            v-model="first_name"
+            required
+            type="text"
+            placeholder="e.g John"
+          />
+        </div>
+        <div class="col-md-12 form-input">
+          <label for="last name">Last Name</label>
+          <base-input
+            v-model="last_name"
+            required
+            type="text"
+            placeholder="e.g Doe"
+          />
+        </div>
+        <div class="col-md-12 form-input">
           <label for="email">Email</label>
-          <base-input required type="text" placeholder="e.g John@gmail.com" />
+          <base-input
+            v-model="email"
+            required
+            type="email"
+            placeholder="e.g Johndoe@gmail.com"
+          />
         </div>
         <div class="col-md-12 form-input">
           <label for="password">Password</label>
-          <base-input required type="text" placeholder="******" />
+          <base-input
+            v-model="password"
+            required
+            type="password"
+            placeholder="******"
+          />
+        </div>
+        <div class="col-md-12 form-input">
+          <label for="password">Confirm Password</label>
+          <base-input
+            v-model="password_confirmation"
+            required
+            type="password"
+            placeholder="******"
+          />
         </div>
         <div class="col-md-12">
           <base-button class="form-button" type="submit">Register</base-button>
@@ -32,9 +83,30 @@
     </div>
   </div>
 </template>
+<script>
+import { mapFields } from 'vuex-map-fields'
+export default {
+  computed: {
+    ...mapFields({
+      user_type_id: 'auth.register.user_type_id',
+      first_name: 'auth.register.first_name',
+      last_name: 'auth.register.last_name',
+      email: 'auth.register.email',
+      password: 'auth.register.password',
+      password_confirmation: 'auth.register.password_confirmation',
+      error: 'auth.error'
+    })
+  },
+  methods: {
+    register() {
+      this.$store.dispatch('auth/register')
+    }
+  }
+}
+</script>
 <style>
-.login-content {
-  padding: 7% 20% 5% 20%;
+.signup-content {
+  padding: 2% 20% 5% 20%;
   background: rgb(248, 248, 248);
   height: 100vh;
 }
