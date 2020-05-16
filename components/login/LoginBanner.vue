@@ -16,7 +16,7 @@
   background: url('~assets/images/login_banner.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .banner-caption {
