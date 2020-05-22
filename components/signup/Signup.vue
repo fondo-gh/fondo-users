@@ -77,7 +77,14 @@
           />
         </div>
         <div class="col-md-12">
-          <base-button class="form-button" type="submit">Register</base-button>
+          <base-button :disabled="loader" class="form-button" type="submit"
+            ><span v-if="!loader">Sign up</span
+            ><span v-if="loader"
+              ><img
+                class="loader"
+                src="~assets/images/loader.svg"
+                alt=""/></span
+          ></base-button>
         </div>
       </form>
     </div>
@@ -94,7 +101,8 @@ export default {
       email: 'auth.register.email',
       password: 'auth.register.password',
       password_confirmation: 'auth.register.password_confirmation',
-      error: 'auth.error'
+      error: 'auth.error',
+      loader: 'auth.register.loader'
     })
   },
   methods: {

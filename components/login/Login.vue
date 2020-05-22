@@ -20,12 +20,19 @@
           <base-input
             v-model="password"
             required
-            type="text"
+            type="password"
             placeholder="******"
           />
         </div>
         <div class="col-md-12">
-          <base-button class="form-button" type="submit">Login</base-button>
+          <base-button :disabled="loader" class="form-button" type="submit">
+            <span v-if="!loader">Login</span>
+            <span v-if="loader"
+              ><img
+                class="loader"
+                src="~assets/images/loader.svg"
+                alt=""/></span
+          ></base-button>
         </div>
       </form>
     </div>
@@ -38,7 +45,8 @@ export default {
     ...mapFields({
       email: 'auth.user.email',
       password: 'auth.user.password',
-      error: 'auth.error'
+      error: 'auth.error',
+      loader: 'auth.user.loader'
     })
   },
   methods: {

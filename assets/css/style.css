@@ -33,14 +33,12 @@ body {
   text-decoration: none;
 }
 
-
 .norm-padding {
   padding-left: 15px;
 }
 .no-padding {
   padding-left: 0px !important;
   padding-right: 0px !important;
-
 }
 
 .header-container {
@@ -67,13 +65,17 @@ body {
 }
 .footer-container {
   padding: 3% 0 3% 0;
-  background: #515151;
+  background: #333
 }
 
 .service-caption {
   text-align: center;
   width: 50%;
   margin: 0 auto;
+}
+
+.service-caption h3 {
+  font-weight: 700;
 }
 
 .main-content-container {
@@ -102,15 +104,14 @@ body {
   color: #333;
 }
 
-.featured-content a{
+.featured-content a {
   text-decoration: none;
   color: #333;
 }
 
-.featured-content a:hover{
+.featured-content a:hover {
   text-decoration: none;
 }
-
 
 .featured-content a h5 {
   color: var(--fondo-deep-yellow);
@@ -123,4 +124,75 @@ body {
   font-weight: bold;
   background-color: rgb(153, 44, 44);
 }
+textarea:focus {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  border: 1px solid var(--fondo-yellow);
+}
 
+textarea {
+  display: block;
+  border-radius: 3px;
+  border: 1px solid rgb(221, 221, 221);
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  transition: 0.3s;
+  resize: none;
+  height: 200px;
+}
+
+.loader {
+  width: 30px;
+  height: 30px;
+}
+/* Dashboard styles */
+
+.main-container {
+  padding: 5% 0 5% 0;
+  min-height: 500px;
+}
+
+.sidebar-container {
+  height: 500px;
+  /* border-right: 1px solid rgb(231, 231, 231); */
+}
+
+.main-investor-container {
+  min-height: 400px;
+  padding: 10px;
+}
+
+.form-button {
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(151, 151, 151);
+  display: block;
+  width: 100%;
+  background: var(--fondo-yellow);
+  transition: 0.3s;
+  cursor: pointer;
+  color: #333;
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-top: 30px;
+}
+
+.form-button-inverse {
+  outline: none;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid rgb(151, 151, 151);
+  display: block;
+  background: transparent;
+  transition: 0.3s;
+  cursor: pointer;
+  color: #333;
+  font-weight: 700;
+}
+
+.form-button:hover {
+  background: transparent;
+  color: #333;
+}

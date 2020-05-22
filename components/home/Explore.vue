@@ -3,8 +3,8 @@
     <div class="service-caption">
       <h3 class="norm-padding">What we do at FONDO</h3>
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo omnis
-        fugiat eaque quasi reiciendis, laborum aliquid reprehenderit.
+        We help startups to be investment ready and connects them to potential
+        investors acroos the globe.
       </p>
     </div>
     <br />
