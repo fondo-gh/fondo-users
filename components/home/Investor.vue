@@ -3,11 +3,12 @@
     <div class="service-caption">
       <h1 class="norm-padding">Become a FONDO Investor Today!</h1>
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo omnis
-        fugiat eaque quasi reiciendis, laborum aliquid reprehenderit.
+        Fondo is giving investors an opportunity to invest as little as they can
+        and also to diversify their investment portfolios by investing in other
+        startups.
       </p>
       <br />
-      <nuxt-link to="#">Get Started Here</nuxt-link>
+      <nuxt-link to="/register">Get Started Here</nuxt-link>
     </div>
   </div>
 </template>

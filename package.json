@@ -31,6 +31,7 @@
     "express": "^4.16.4",
     "nuxt": "^2.0.0",
     "vue-notifications": "^1.0.2",
+    "vue-toasted": "^1.1.28",
     "vuex-map-fields": "^1.4.0",
     "vuex-persistedstate": "^3.0.1"
   },

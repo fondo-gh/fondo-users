@@ -22,18 +22,13 @@ module.exports = {
         rel: 'stylesheet',
         href:
           'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet'
-      },
-      {
-        href:
-          'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
-        rel: 'stylesheet'
       }
     ]
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#ffd801' },
   /*
    ** Global CSS
    */
@@ -41,12 +36,19 @@ module.exports = {
     'assets/css/style.css',
     'assets/css/animate.css',
     'assets/css/responsive.css',
-    'assets/css/bootstrap.min.css'
+    'assets/css/bootstrap.min.css',
+    'assets/fonts/css/font-awesome.min.css'
   ],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['components/_globals.js'],
+  plugins: [
+    'components/_globals.js',
+    'plugins/services/investor.js',
+    'plugins/services/startups.js',
+    { src: '~/plugins/storage.js', ssr: false },
+    { src: '~/plugins/toasted.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
