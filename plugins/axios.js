@@ -13,6 +13,5 @@ const headers = {
 const client = axios.create({
   baseURL: 'http://fondo-app-gh.herokuapp.com/api/v1',
   headers
-})
 
 export default client

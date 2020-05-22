@@ -14,13 +14,13 @@ const state = () => ({
     password_confirmation: null,
     loader: null
   },
+
   error: null
 })
 
 const mutations = {
   setCurrentUser(state, data) {
     state.currentUser = data
-
     if (data.user_type === 'Entrepreneur') {
       if (data.profile_is_completed) {
         window.location = '/dashboard/entrepreneur'
