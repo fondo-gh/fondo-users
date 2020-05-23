@@ -20,15 +20,28 @@
       </div>
       <div class="col-md-2 other-links">
         <ul>
-          <li><nuxt-link to="/login">Login</nuxt-link></li>
-          <li><nuxt-link to="/register">Signup</nuxt-link></li>
+          <template v-if="!user">
+            <li><nuxt-link to="/login">Login</nuxt-link></li>
+            <li><nuxt-link to="/register">Signup</nuxt-link></li>
+          </template>
+          <template v-if="user">
+            <li>
+              <button @click="$store.commit('auth/logout')">Logout</button>
+            </li>
+          </template>
         </ul>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
+  computed: {
+    ...mapState({
+      user: (state) => state.auth.currentUser
+    })
+  },
   methods: {
     openMenu() {
       const menu = this.$refs.menuIcon
@@ -75,6 +88,14 @@ export default {
   display: inline-block;
 }
 .other-links ul li a {
+  color: #333;
+  padding: 5px 12px;
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.other-links ul li button {
   color: #333;
   padding: 5px 12px;
   border: 1px solid rgb(180, 180, 180);

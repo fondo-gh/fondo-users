@@ -1,28 +1,64 @@
 <template>
-  <div class="login-content">
+  <div class="login-content col-md-12">
     <div class="login-form-container col-md-12 ">
       <h4 class="norm-padding"><strong>LOGIN</strong></h4>
+      <p v-if="error" class="error-box animated fadeIn">{{ error }}</p>
       <p class="norm-padding">Check your progress in securing an investment</p>
       <br />
-      <form>
+      <form @submit.prevent="login">
         <div class="col-md-12 form-input">
           <label for="email">Email</label>
-          <base-input required type="text" placeholder="e.g John@gmail.com" />
+          <base-input
+            v-model="email"
+            required
+            type="text"
+            placeholder="e.g John@gmail.com"
+          />
         </div>
         <div class="col-md-12 form-input">
           <label for="password">Password</label>
-          <base-input required type="text" placeholder="******" />
+          <base-input
+            v-model="password"
+            required
+            type="password"
+            placeholder="******"
+          />
         </div>
         <div class="col-md-12">
-          <base-button class="form-button" type="submit">Login</base-button>
+          <base-button :disabled="loader" class="form-button" type="submit">
+            <span v-if="!loader">Login</span>
+            <span v-if="loader"
+              ><img
+                class="loader"
+                src="~assets/images/loader.svg"
+                alt=""/></span
+          ></base-button>
         </div>
       </form>
     </div>
   </div>
 </template>
+<script>
+import { mapFields } from 'vuex-map-fields'
+export default {
+  computed: {
+    ...mapFields({
+      email: 'auth.user.email',
+      password: 'auth.user.password',
+      error: 'auth.error',
+      loader: 'auth.user.loader'
+    })
+  },
+  methods: {
+    login() {
+      this.$store.dispatch('auth/login')
+    }
+  }
+}
+</script>
 <style>
 .login-content {
-  padding: 7% 20% 5% 20%;
+  padding: 10% 20% 5% 20%;
   background: rgb(248, 248, 248);
   height: 100vh;
 }

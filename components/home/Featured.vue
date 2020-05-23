@@ -2,10 +2,6 @@
   <div class="explore container">
     <div class="service-caption">
       <h3 class="norm-padding">Featured Startups</h3>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo omnis
-        fugiat eaque quasi reiciendis, laborum aliquid reprehenderit.
-      </p>
     </div>
 
     <br />

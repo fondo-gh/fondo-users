@@ -1,4 +1,14 @@
-export const state = () => ({
+const state = () => ({
+  newstartup: {
+    company_name: null,
+    caption: null,
+    product_image: null,
+    funds_to_raise: null,
+    duration_for_raise: null,
+    startup_id: null,
+    loader: false
+  },
+  startups: null,
   featured: [
     {
       id: 1,
@@ -39,7 +49,7 @@ export const state = () => ({
   ]
 })
 
-export const mutations = {
+const mutations = {
   findCourse(state, slug) {
     const singleCourse = state.featured.find((data) => data.slug === slug)
     state.oneCourse = singleCourse
@@ -48,16 +58,28 @@ export const mutations = {
   findCourseById(state, payload) {
     const courseTee = state.featured.find((data) => data.slug === payload.slug)
     state.courseTee = courseTee
+  },
+  setStartup(state, data) {
+    state.startups = data
   }
 }
 
-export const actions = {
-  async getAllCourses() {
+const actions = {
+  async getAllStartups({ commit }) {
     try {
-      const { data } = await this.$course.getAllCourses()
+      const { data } = await this.$startup.allStartups()
       console.log(data)
+      commit('setStartup', data.data)
     } catch (error) {
-      console.log(error)
+      console.log(error.response)
     }
   }
 }
+
+export default {
+  namespaced: true,
+  state,
+  actions,
+  mutations
+}
+

@@ -7,12 +7,9 @@
       <div class="col-md-6 no-padding login-banner">
         <login-banner />
       </div>
-      <div class="col-md-6 no-padding login-content">
+      <div class="col-md-6 no-padding">
         <signup />
       </div>
-    </div>
-    <div class="footer-container">
-      <base-footer />
     </div>
   </div>
 </template>
@@ -27,9 +24,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.login-full-container {
-  height: 100vh;
-  overflow: hidden;
-}
-</style>
