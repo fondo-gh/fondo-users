@@ -8,48 +8,22 @@
       <!-- <p>All fields are required</p> -->
       <div class="form-container">
         <form @submit.prevent="saveProfile">
-          <div class="form-input">
-            <div class="col-md-6 form-input">
-              <label for="last name">First Name </label>
-              <base-input v-model="user.first_name" type="text" readonly />
+          <template v-if="user">
+            <div class="form-input">
+              <div class="col-md-6 form-input">
+                <label for="last name">First Name </label>
+                <base-input v-model="user.first_name" type="text" readonly />
+              </div>
+              <div class="col-md-6 form-input">
+                <label for="last name">Last Name </label>
+                <base-input v-model="user.last_name" type="text" readonly />
+              </div>
             </div>
-            <div class="col-md-6 form-input">
-              <label for="last name">Last Name </label>
-              <base-input v-model="user.last_name" type="text" readonly />
+            <div class="col-md-12 form-input">
+              <label for="last name">Email </label>
+              <base-input v-model="user.email" type="text" readonly />
             </div>
-          </div>
-          <div class="col-md-12 form-input">
-            <label for="last name">Email </label>
-            <base-input v-model="user.email" type="text" readonly />
-          </div>
-          <div class="col-md-12 form-input">
-            <label for="first name">A short bio about yourself</label>
-            <textarea v-model="bio" name="bio" id="" required></textarea>
-          </div>
-          <div class="col-md-12 form-input">
-            <label for="last name"
-              >Interest <small><i>Seperate with comma</i></small></label
-            >
-            <base-input v-model="interest" type="text" />
-          </div>
-          <div class="col-md-12 form-input">
-            <label for="last name">Occupation </label>
-            <base-input v-model="occupation" type="text" />
-          </div>
-          <div class="col-md-12 form-input">
-            <label for="email"
-              >Startups invested in<small
-                ><i> Seperate with comma</i></small
-              ></label
-            >
-            <base-input v-model="startups_invested_in" type="text" />
-          </div>
-
-          <div class="col-md-12 form-input">
-            <label for="email">Amount Invested ($)</label>
-            <base-input v-model="amount_invested" type="number" />
-          </div>
-
+          </template>
           <div class="col-md-12">
             <base-button :disabled="loader" class="form-button" type="submit"
               ><span v-if="!loader">Save Changes</span>

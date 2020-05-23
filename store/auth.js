@@ -22,11 +22,12 @@ const mutations = {
   setCurrentUser(state, data) {
     state.currentUser = data
     if (data.user_type === 'Entrepreneur') {
-      if (data.profile_is_completed) {
-        window.location = '/dashboard/entrepreneur'
-      } else {
-        window.location = '/dashboard/entrepreneur/profile'
-      }
+      // if (data.profile_is_completed) {
+      //   window.location = '/dashboard/entrepreneur'
+      // } else {
+      //   window.location = '/dashboard/entrepreneur/profile'
+      window.location = '/dashboard/entrepreneur/mystartups'
+      // }
     }
 
     if (data.user_type === 'Investor') {
@@ -70,8 +71,8 @@ const actions = {
     try {
       commit('toggleLoader', 'register')
       const { data } = await this.$axios.post('/user/register', state.register)
-      commit('setError', null)
       commit('setCurrentUser', data)
+      commit('setError', null)
       commit('toggleLoader', 'register')
     } catch (error) {
       commit('setError', error.response.data.error.message)

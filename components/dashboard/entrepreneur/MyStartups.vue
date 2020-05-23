@@ -13,23 +13,47 @@
       <br />
       <br />
       <div class="col-md-12 startup-table">
-        <b-table striped hover :items="items"></b-table>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td>No.</td>
+                <td>Company Name</td>
+                <td>Status</td>
+                <td>Actions</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="startup in mystartups" :key="startup.id">
+                <td>{{ startup.id }}</td>
+                <td>{{ startup.company_name }}</td>
+                <td>
+                  <span v-if="startup.approved" class="label label-success">
+                    Approved</span
+                  >
+                  <span v-else class="label label-danger">Pending</span>
+                </td>
+                <td>
+                  <nuxt-link to="#" class="btn btn-default btn-xs"
+                    >Complete Registration</nuxt-link
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <br />
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
-  data() {
-    return {
-      items: [
-        { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-        { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-        { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-        { age: 38, first_name: 'Jami', last_name: 'Carney' }
-      ]
-    }
+  computed: {
+    ...mapState({
+      mystartups: (state) => state.startups.mystartups
+    })
   }
 }
 </script>
@@ -50,5 +74,9 @@ export default {
 }
 .startup-table {
   margin-top: 50px;
+}
+
+table thead tr {
+  font-weight: 600;
 }
 </style>

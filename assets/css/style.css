@@ -196,4 +196,7 @@ textarea {
   background: transparent;
   color: #333;
 }
+.form-input {
+  margin-bottom: 20px;
+}
 

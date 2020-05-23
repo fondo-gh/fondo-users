@@ -19,6 +19,9 @@ import Startups from '~/components/dashboard/entrepreneur/MyStartups'
 export default {
   components: {
     Startups
+  },
+  async asyncData({ store }) {
+    await store.dispatch('startups/getMyStartups')
   }
 }
 </script>

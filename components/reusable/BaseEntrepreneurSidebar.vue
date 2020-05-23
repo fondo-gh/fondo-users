@@ -38,7 +38,7 @@ export default {
   color: #333;
   padding: 10px 8px;
   display: block;
-  font-size: 0.9em;
+  font-size: 1.2em;
   border-bottom: 1px solid rgb(241, 241, 241);
   text-decoration: none;
   background: white;
