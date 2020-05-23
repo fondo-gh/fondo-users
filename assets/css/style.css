@@ -104,7 +104,7 @@ body {
   color: #333;
 }
 
-.featured-content a{
+.featured-content a {
   text-decoration: none;
   color: #333;
 }
@@ -195,4 +195,7 @@ textarea {
 .form-button:hover {
   background: transparent;
   color: #333;
+}
+.form-input {
+  margin-bottom: 20px;
 }
