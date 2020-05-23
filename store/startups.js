@@ -9,7 +9,6 @@ const state = () => ({
     loader: false
   },
   startups: null,
-
   featured: [
     {
       id: 1,
@@ -83,3 +82,4 @@ export default {
   actions,
   mutations
 }
+

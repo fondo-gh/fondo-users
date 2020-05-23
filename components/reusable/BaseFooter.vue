@@ -42,5 +42,29 @@
   padding-top: 10px;
   font-weight: 500;
   font-size: 1.2em;
+
+}
+
+.social-media ul {
+  list-style: none;
+  padding: 0 !important;
+}
+
+.social-media ul li {
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.social-media ul li a {
+  color: white;
+}
+
+.social-media h4 {
+  color: white;
+  margin-bottom: 25px;
+}
+
+.social-media p {
+  color: white;
 }
 </style>
