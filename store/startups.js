@@ -10,7 +10,6 @@ const state = () => ({
   },
   startups: null,
   mystartups: null,
-
   featured: [
     {
       id: 1,
