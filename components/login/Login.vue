@@ -47,7 +47,6 @@ export default {
       password: 'auth.user.password',
       error: 'auth.error',
       loader: 'auth.user.loader'
-      error: 'auth.error'
     })
   },
   methods: {

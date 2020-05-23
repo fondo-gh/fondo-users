@@ -103,7 +103,6 @@ export default {
       password_confirmation: 'auth.register.password_confirmation',
       error: 'auth.error',
       loader: 'auth.register.loader'
-
     })
   },
   methods: {
