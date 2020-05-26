@@ -79,23 +79,6 @@ module.exports = {
   /*
    ** Build configuration
    */
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: {
-            url: 'http://fondo-app-gh.herokuapp.com/api/v1/user/login',
-            method: 'post',
-            propertyName: 'data.token'
-          }
-          // logout: { url: '/user/logout', method: 'post' },
-          // user: { url: '/user/user', method: 'get', propertyName: 'data' }
-        },
-        tokenRequired: false,
-        tokenType: 'Bearer'
-      }
-    }
-  },
   build: {
     /*
      ** You can extend webpack config here

@@ -3,7 +3,7 @@ import axios from 'axios'
 let token = ''
 const user = JSON.parse(localStorage.getItem('fondo'))
 
-if (user.auth.currentUser) {
+if (user) {
   token = user.auth.currentUser.token
 }
 const headers = {
