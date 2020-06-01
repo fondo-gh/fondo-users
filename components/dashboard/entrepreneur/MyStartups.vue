@@ -17,7 +17,6 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <td>No.</td>
                 <td>Company Name</td>
                 <td>Status</td>
                 <td>Actions</td>
@@ -25,7 +24,6 @@
             </thead>
             <tbody>
               <tr v-for="startup in mystartups" :key="startup.id">
-                <td>{{ startup.id }}</td>
                 <td>{{ startup.company_name }}</td>
                 <td>
                   <span v-if="startup.approved" class="label label-success">
@@ -34,7 +32,11 @@
                   <span v-else class="label label-danger">Pending</span>
                 </td>
                 <td>
-                  <nuxt-link to="#" class="btn btn-default btn-xs"
+                  <nuxt-link
+                    :to="
+                      `/dashboard/entrepreneur/mystartups/completeregister/${startup.id}`
+                    "
+                    class="btn btn-default btn-xs"
                     >Complete Registration</nuxt-link
                   >
                 </td>

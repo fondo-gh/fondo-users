@@ -11,22 +11,32 @@
       <div ref="barThree" class="bar3"></div>
     </div>
     <div ref="navigationContainer" class="nav-container">
-      <div class="col-md-8 nav-links">
+      <div class="col-md-7 nav-links">
         <ul>
           <li><nuxt-link to="#">What is FONDO?</nuxt-link></li>
           <li><nuxt-link to="#">Our startups</nuxt-link></li>
           <li><nuxt-link to="#">Invest in startup</nuxt-link></li>
         </ul>
       </div>
-      <div class="col-md-2 other-links">
+      <div class="col-md-3 other-links">
         <ul>
           <template v-if="!user">
             <li><nuxt-link to="/login">Login</nuxt-link></li>
             <li><nuxt-link to="/register">Signup</nuxt-link></li>
           </template>
           <template v-if="user">
+            <li v-if="user.user_type === 'Entrepreneur'">
+              <button @click="$router.push('/dashboard/entrepreneur')">
+                Dashboard
+              </button>
+            </li>
+            <li v-if="user.user_type === 'Investor'">
+              <button @click="$router.push('/dashboard/investor')">
+                Dashboard
+              </button>
+            </li>
             <li>
-              <button @click="$store.commit('auth/logout')">Logout</button>
+              <button @click="logoutuser">Logout</button>
             </li>
           </template>
         </ul>
@@ -48,6 +58,9 @@ export default {
       const navigationContainer = this.$refs.navigationContainer
       menu.classList.toggle('change')
       navigationContainer.classList.toggle('mobile-nav')
+    },
+    logoutuser() {
+      this.$store.commit('auth/logout')
     }
   }
 }

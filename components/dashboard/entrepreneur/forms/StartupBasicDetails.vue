@@ -82,7 +82,11 @@ export default {
       this.$refs.imageInput.click()
     },
     saveBasicData() {
-      this.$store.dispatch('startups/createBasicStartup')
+      if (!this.file) {
+        alert('You have to upload an image for your startup')
+      } else {
+        this.$store.dispatch('startups/createBasicStartup')
+      }
     },
     loadImage(event) {
       const file = event.target.files[0]

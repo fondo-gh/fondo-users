@@ -4,7 +4,14 @@ let token = ''
 const user = JSON.parse(localStorage.getItem('fondo'))
 
 if (user) {
-  token = user.auth.currentUser.token
+  // check if current user is not null
+  if (user.auth.currentUser !== null) {
+    token = user.auth.currentUser.token
+  } else {
+    token = null
+  }
+} else {
+  token = null
 }
 const headers = {
   Authorization: `Bearer ${token}`
