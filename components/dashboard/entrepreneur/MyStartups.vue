@@ -12,18 +12,28 @@
       </div>
       <br />
       <br />
-      <div class="col-md-12 startup-table">
+      <div v-if="mystartups.length > 0" class="col-md-12 startup-table">
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
               <tr>
-                <td>Company Name</td>
+                <td>Startup Image</td>
+                <td>Startup Name</td>
                 <td>Status</td>
                 <td>Actions</td>
               </tr>
             </thead>
             <tbody>
               <tr v-for="startup in mystartups" :key="startup.id">
+                <td>
+                  <img
+                    :src="startup.product_image"
+                    class="img-thumbnail"
+                    width="50"
+                    :alt="startup.company_name"
+                  />
+                </td>
+
                 <td>{{ startup.company_name }}</td>
                 <td>
                   <span v-if="startup.approved" class="label label-success">
@@ -32,18 +42,20 @@
                   <span v-else class="label label-danger">Pending</span>
                 </td>
                 <td>
-                  <nuxt-link
-                    :to="
-                      `/dashboard/entrepreneur/mystartups/completeregister/${startup.id}`
-                    "
+                  <button
                     class="btn btn-default btn-xs"
-                    >Complete Registration</nuxt-link
+                    @click="completeRegister(startup.id)"
                   >
+                    Complete Registration
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+      </div>
+      <div class="col-md-12" v-else style="margin-top:50px">
+        <p>You do not have any startup currently registered.</p>
       </div>
       <br />
     </div>
@@ -56,6 +68,11 @@ export default {
     ...mapState({
       mystartups: (state) => state.startups.mystartups
     })
+  },
+  methods: {
+    completeRegister(id) {
+      this.$store.commit('startups/setSingleStartup', id)
+    }
   }
 }
 </script>

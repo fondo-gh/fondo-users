@@ -11,6 +11,13 @@
       <tab-content
         title="Startup Details"
         icon="ti-user"
+        :before-change="saveDetails"
+      >
+        <startup-basic-details />
+      </tab-content>
+      <tab-content
+        title="Startup Type"
+        icon="ti-user"
         :before-change="saveType"
       >
         <startup-type />
@@ -32,8 +39,7 @@
       <tab-content title="Finish" icon="ti-check">
         <div>
           <h4>
-            Thank you for adding a startup.Your Application will reviewed
-            shortly
+            Thank you for adding a startup.Your Application is been reviewed.
           </h4>
         </div>
       </tab-content>
@@ -43,6 +49,7 @@
 <script>
 import { FormWizard, TabContent } from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
+import StartupBasicDetails from './forms/StartupBasic'
 import StartupType from './forms/StartupType'
 import StartupContactDetails from './forms/StartupContactDetails'
 import StartupBusinessModel from './forms/StartupBusinessModel'
@@ -51,6 +58,7 @@ export default {
   components: {
     FormWizard,
     TabContent,
+    StartupBasicDetails,
     StartupType,
     StartupContactDetails,
     StartupBusinessModel
@@ -84,6 +92,12 @@ export default {
       }
       const startupId = this.$route.params.id
       await this.$store.dispatch('startups/saveContact', startupId)
+      return true
+    },
+
+    async saveDetails() {
+      const startupId = this.$route.params.id
+      await this.$store.dispatch('startups/saveDetails', startupId)
       return true
     },
 

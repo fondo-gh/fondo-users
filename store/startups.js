@@ -1,10 +1,10 @@
 const state = () => ({
   newstartup: {
-    company_name: 'xpendly',
-    caption: 'Fund managment',
+    company_name: null,
+    caption: null,
     product_image_file: null,
-    funds_to_raise: '$20,000',
-    duration_for_raise: '3 months',
+    funds_to_raise: null,
+    duration_for_raise: null,
     startup_id: null,
     loader: false
   },
@@ -16,8 +16,9 @@ const state = () => ({
     startup_id: null,
     startup_type_id: 3,
     startup_industry_id: 2,
-    has_patent: 1,
-    location: null
+    has_patent: false,
+    location: null,
+    id: null
   },
   startupcontact: {
     startup_id: null,
@@ -40,7 +41,8 @@ const state = () => ({
     key_metrics: null,
     cost_structure: null,
     financial_file: null,
-    optional_file: null
+    optional_file: null,
+    id: null
   },
   featured: [
     {
@@ -114,6 +116,32 @@ const mutations = {
   },
   setStartupIndustry(state, data) {
     state.startupindustries = data
+  },
+  setSingleStartup(state, id) {
+    const singleStartup = state.mystartups.find((data) => data.id === id)
+    state.newstartup.caption = singleStartup.caption
+    state.newstartup.funds_to_raise = singleStartup.funds_to_raise
+    state.newstartup.duration_for_raise = singleStartup.duration_for_raise
+    state.newstartup.company_name = singleStartup.company_name
+    state.newstartup.product_image = singleStartup.product_image
+
+    if (singleStartup.startup_detail) {
+      state.startupdetails = singleStartup.startup_detail
+    }
+    if (singleStartup.contact_details) {
+      state.startupcontact = singleStartup.contact_details
+    }
+    if (singleStartup.business_model) {
+      state.startupbusinessmodel = singleStartup.business_model
+    }
+
+    this.$router.push(
+      `/dashboard/entrepreneur/mystartups/completeregister/${id}`
+    )
+  },
+
+  setFile(state, data) {
+    state.startupbusinessmodel[data.type] = data.file
   }
 }
 
@@ -146,10 +174,8 @@ const actions = {
     payload.append('product_image_file', state.newstartup.product_image_file)
     payload.append('funds_to_raise', state.newstartup.funds_to_raise)
     payload.append('duration_for_raise', state.newstartup.duration_for_raise)
-    console.log(payload)
     try {
-      const { data } = await this.$startup.createBasicStartup(payload)
-      console.log(data)
+      await this.$startup.createBasicStartup(payload)
       this._vm.$toasted.show('Basic Startup Created Successfully !!', {
         theme: 'toasted-primary',
         position: 'top-center',
@@ -160,6 +186,25 @@ const actions = {
     } catch (error) {
       commit('toggleLoader', 'newstartup')
       this._vm.$toasted.show(`Sorry ${error.response.data.error.message}`, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 3000
+      })
+    }
+  },
+  async saveDetails({ state }, id) {
+    const payload = new FormData()
+    payload.append('company_name', state.newstartup.company_name)
+    payload.append('caption', state.newstartup.caption)
+    payload.append('product_image_file', state.newstartup.product_image_file)
+    payload.append('funds_to_raise', state.newstartup.funds_to_raise)
+    payload.append('duration_for_raise', state.newstartup.duration_for_raise)
+    payload.append('startup_id', id)
+
+    try {
+      await this.$startup.createBasicStartup(payload)
+    } catch (error) {
+      this._vm.$toasted.show(error.response.data.error.message, {
         theme: 'toasted-primary',
         position: 'top-center',
         duration: 3000

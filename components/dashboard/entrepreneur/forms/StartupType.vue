@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <form ref="detailForm"> -->
     <div class="col-md-12 form-input">
       <label for="last name">What is your startup type </label>
       <base-select v-model="startup_type_id" :data="startuptypes" required />
@@ -16,7 +15,7 @@
       />
     </div>
     <div class="col-md-12 form-input">
-      <label for="last name">Does you startup has patent? </label>
+      <label for="last name">Does your startup has patent? </label>
       <base-select v-model="has_patent" :data="hasPatent" required />
     </div>
     <div class="col-md-12 form-input">
@@ -27,7 +26,6 @@
         type="text"
       />
     </div>
-    <!-- </form> -->
   </div>
 </template>
 <script>
@@ -37,8 +35,8 @@ export default {
   data() {
     return {
       hasPatent: [
-        { id: 1, name: 'Yes' },
-        { id: 0, name: 'No' }
+        { id: true, name: 'Yes' },
+        { id: false, name: 'No' }
       ]
     }
   },

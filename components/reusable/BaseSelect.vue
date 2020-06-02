@@ -1,10 +1,9 @@
 <template>
   <div>
     <select
+      v-model="selected"
       :name="name"
       v-bind="$attrs"
-      @blur="$emit('blur')"
-      @focus="$emit('focus')"
       @change="updateInput"
       @input="updateInput"
     >
@@ -19,7 +18,7 @@ export default {
   props: {
     value: {
       default: null,
-      type: Number
+      type: null
     },
     className: {
       default: '',
@@ -42,8 +41,10 @@ export default {
       default: null
     }
   },
-  mounted() {
-    this.$el.value = this.value
+  computed: {
+    selected() {
+      return this.value
+    }
   },
   methods: {
     updateInput(e) {

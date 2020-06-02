@@ -57,6 +57,11 @@ const actions = {
       commit('setError', null)
       commit('toggleLoader', 'user')
     } catch (error) {
+      this._vm.$toasted.show(error.response.data.error.message, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 3000
+      })
       commit('setError', error.response.data.error.message)
       commit('toggleLoader', 'user')
     }
@@ -70,6 +75,11 @@ const actions = {
       commit('setError', null)
       commit('toggleLoader', 'register')
     } catch (error) {
+      this._vm.$toasted.show(error.response.data.error.message, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 3000
+      })
       commit('setError', error.response.data.error.message)
       commit('toggleLoader', 'register')
     }

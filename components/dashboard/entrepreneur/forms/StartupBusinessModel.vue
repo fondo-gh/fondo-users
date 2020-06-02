@@ -2,65 +2,101 @@
   <div>
     <form @submit.prevent="saveBasicData">
       <div class="col-md-12 form-input">
-        <label for="last name">What are your key resources? </label>
+        <label for="last name"
+          >What are your key resources?
+          <br />
+          <small
+            >(Physical,intellectual and financial assets of the company)</small
+          >
+        </label>
         <textarea v-model="key_resourses"></textarea>
       </div>
       <div class="col-md-12 form-input">
-        <label for="last name">Who is your target market? </label>
+        <label for="last name"
+          >Who is your target market? <br />
+          <small>(Market or customer target suitable for your product)</small>
+        </label>
         <textarea v-model="customer_target"></textarea>
       </div>
       <div class="col-md-12 form-input">
-        <label for="last name">What is your value proposition </label>
+        <label for="last name"
+          >What is your value proposition? <br />
+          <small
+            >(Why is the customer willing to pay for the solution?)</small
+          ></label
+        >
         <textarea v-model="value_proposition"></textarea>
       </div>
       <div class="col-md-12 form-input">
-        <label for="last name">What are your sales channel? </label>
+        <label for="last name"
+          >What are your sales channel? <br />
+          <small
+            >(How is the company intending to reach its customers?)</small
+          ></label
+        >
         <textarea v-model="sales_channel"></textarea>
       </div>
       <div class="col-md-12 form-input">
-        <label for="last name">What is your revenue streams? </label>
+        <label for="last name"
+          >What is your revenue streams? <br />
+          <small>(What are the sources of revenue for your business?)</small>
+        </label>
         <textarea v-model="revenue_streams"></textarea>
       </div>
       <div class="col-md-12 form-input">
-        <label for="last name">Describe your key metrics </label>
+        <label for="last name"
+          >Describe your key metrics <br />
+          <small>(State your key performance indicators)</small>
+        </label>
         <textarea v-model="key_metrics"></textarea>
       </div>
       <div class="col-md-12 form-input">
-        <label for="last name">Describe your cost structure </label>
+        <label for="last name"
+          >Describe your cost structure <br />
+          <small
+            >(What are the company’s costs and how should it affect
+            pricing?)</small
+          >
+        </label>
         <textarea v-model="cost_structure"></textarea>
       </div>
       <div class="col-md-12 form-input">
         <base-button
           type="button"
           class="form-button-inverse"
-          @click.native="selectImage"
+          @click.native="selectFile('financialFile')"
           >Upload Your Financial File (pdf, word, excel)
-          <small><i>(Not more than 5MB)</i></small></base-button
+          <small><i>(Not more than 5MB)</i></small> <br />
+          <small
+            >(This should contain your expenses,revenue,gross profit and net
+            profit)</small
+          ></base-button
         >
         <input
           type="file"
-          @change="loadImage"
-          accept="image/*"
+          @change="loadFinancialFile"
           style="display: none"
-          ref="imageInput"
+          ref="financialFile"
         />
+        <span>{{ financialFile.url }}</span>
         <br />
       </div>
       <div class="col-md-12 form-input">
         <base-button
           type="button"
           class="form-button-inverse"
-          @click.native="selectImage"
-          >Upload any other file (pdf, word, excel)
-          <small><i>(Not more than 5MB)</i></small></base-button
+          @click.native="selectFile('otherFile')"
+          >Upload any other relevant file pertaining to your business (pdf,
+          word, excel) <small><i>(Not more than 5MB)</i></small></base-button
         >
         <input
           type="file"
-          @change="loadImage"
+          @change="loadOtherFile"
           accept="image/*"
           style="display: none"
-          ref="imageInput"
+          ref="otherFile"
         />
+        <span>{{ otherFile.url }}</span>
         <br />
       </div>
     </form>
@@ -72,8 +108,14 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      file: null,
-      imageUrl: null
+      financialFile: {
+        file: null,
+        url: null
+      },
+      otherFile: {
+        file: null,
+        url: null
+      }
     }
   },
   computed: {
@@ -100,19 +142,41 @@ export default {
         this.$store.dispatch('startups/createBasicStartup')
       }
     },
-    selectImage() {
-      this.$refs.imageInput.click()
+    selectFile(file) {
+      this.$refs[file].click()
     },
-    loadImage(event) {
+    loadFinancialFile(event) {
       const file = event.target.files[0]
-      this.file = event.target.files[0]
-      this.$store.commit('startups/setImage', event.target.files[0])
-      if (file.size > 2000000) {
-        alert('Event image cannot be more than 2MB')
+      this.financialFile.url = event.target.files[0].name
+      const payload = {
+        file: event.target.files[0],
+        type: 'financial_file'
+      }
+      this.$store.commit('startups/setFile', payload)
+      if (file.size > 5000000) {
+        alert('Financial cannot be more than 5MB')
       } else {
         const reader = new FileReader()
         reader.onload = (e) => {
-          this.imageUrl = e.target.result
+          this.financialFile.file = e.target.files[0]
+        }
+        reader.readAsDataURL(file)
+      }
+    },
+    loadOtherFile(event) {
+      const file = event.target.files[0]
+      this.otherFile.url = event.target.files[0].name
+      const payload = {
+        file: event.target.files[0],
+        type: 'optional_file'
+      }
+      this.$store.commit('startups/setFile', payload)
+      if (file.size > 5000000) {
+        alert('Other file cannot be more than 5MB')
+      } else {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          this.otherFile.file = e.target.files[0]
         }
         reader.readAsDataURL(file)
       }
