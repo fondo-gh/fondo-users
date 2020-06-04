@@ -126,9 +126,7 @@ export default {
       sales_channel: 'startups.startupbusinessmodel.sales_channel',
       revenue_streams: 'startups.startupbusinessmodel.revenue_streams',
       key_metrics: 'startups.startupbusinessmodel.key_metrics',
-      cost_structure: 'startups.startupbusinessmodel.cost_structure',
-      financial_file: 'startups.startupbusinessmodel.financial_file',
-      optional_file: 'startups.startupbusinessmodel.optional_file'
+      cost_structure: 'startups.startupbusinessmodel.cost_structure'
     }),
     ...mapState({
       user: (state) => state.auth.currentUser

@@ -26,6 +26,15 @@
         type="text"
       />
     </div>
+    <div class="col-md-12 form-input">
+      <label for="last name">What is your business registration number?</label>
+      <base-input
+        v-model="business_registration_number"
+        placeholder="1234551"
+        type="text"
+        required
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -46,6 +55,8 @@ export default {
       startup_industry_id: 'startups.startupdetails.startup_industry_id',
       has_patent: 'startups.startupdetails.has_patent',
       location: 'startups.startupdetails.location',
+      business_registration_number:
+        'startups.startupdetails.business_registration_number',
       loader: 'startups.newstartup.loader'
     }),
     ...mapState({

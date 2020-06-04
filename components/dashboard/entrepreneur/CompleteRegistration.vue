@@ -36,6 +36,27 @@
       >
         <startup-business-model />
       </tab-content>
+      <tab-content
+        title="Product Detail"
+        icon="ti-check"
+        :before-change="saveProductDetail"
+      >
+        <product-detail />
+      </tab-content>
+      <tab-content
+        title="Startup Co founders"
+        icon="ti-check"
+        :before-change="saveCofounderDetail"
+      >
+        <startup-cofounder />
+      </tab-content>
+      <tab-content
+        title="Startup Team Details"
+        icon="ti-check"
+        :before-change="saveTeamDetail"
+      >
+        <team-detail />
+      </tab-content>
       <tab-content title="Finish" icon="ti-check">
         <div>
           <h4>
@@ -53,6 +74,9 @@ import StartupBasicDetails from './forms/StartupBasic'
 import StartupType from './forms/StartupType'
 import StartupContactDetails from './forms/StartupContactDetails'
 import StartupBusinessModel from './forms/StartupBusinessModel'
+import ProductDetail from './forms/ProductDetail'
+import StartupCofounder from './forms/CofounderDetail'
+import TeamDetail from './forms/TeamDetail'
 
 export default {
   components: {
@@ -61,7 +85,10 @@ export default {
     StartupBasicDetails,
     StartupType,
     StartupContactDetails,
-    StartupBusinessModel
+    StartupBusinessModel,
+    ProductDetail,
+    StartupCofounder,
+    TeamDetail
   },
   methods: {
     onComplete() {
@@ -104,6 +131,23 @@ export default {
     async saveBusiness() {
       const startupId = this.$route.params.id
       await this.$store.dispatch('startups/saveBusinessModel', startupId)
+      return true
+    },
+
+    async saveProductDetail() {
+      const startupId = this.$route.params.id
+      await this.$store.dispatch('startups/saveProductDetail', startupId)
+      return true
+    },
+
+    async saveCofounderDetail() {
+      const startupId = this.$route.params.id
+      await this.$store.dispatch('startups/saveCofounderDetail', startupId)
+      return true
+    },
+    async saveTeamDetail() {
+      const startupId = this.$route.params.id
+      await this.$store.dispatch('startups/saveTeamDetail', startupId)
       return true
     }
   }

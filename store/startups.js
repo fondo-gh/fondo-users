@@ -1,3 +1,4 @@
+const { auth } = JSON.parse(localStorage.getItem('fondo'))
 const state = () => ({
   newstartup: {
     company_name: null,
@@ -12,12 +13,16 @@ const state = () => ({
   mystartups: null,
   startuptypes: null,
   startupindustries: null,
+  productprogressdetail: null,
+  startupcofounder: null,
+  startupteam: null,
   startupdetails: {
     startup_id: null,
     startup_type_id: 3,
     startup_industry_id: 2,
     has_patent: false,
     location: null,
+    business_registration_number: null,
     id: null
   },
   startupcontact: {
@@ -40,8 +45,42 @@ const state = () => ({
     revenue_streams: null,
     key_metrics: null,
     cost_structure: null,
-    financial_file: null,
-    optional_file: null,
+    financial_file_upload: null,
+    optional_file_upload: null,
+    id: null
+  },
+  productdetails: {
+    startup_id: null,
+    product_progress_id: 1,
+    product_url: null,
+    id: null
+  },
+  cofounderdetail: {
+    startup_id: null,
+    funding_amount: null,
+    rate_of_devotion: null,
+    cofounders: [
+      {
+        name: `${auth.currentUser.first_name} ${auth.currentUser.last_name}`,
+        email: auth.currentUser.email,
+        cofounder_role_id: 1
+      },
+      {
+        name: null,
+        email: null,
+        cofounder_role_id: 1
+      }
+    ],
+    id: null
+  },
+  teamdetail: {
+    startup_id: null,
+    startup_teams: [
+      {
+        name: null,
+        business_team_id: 1
+      }
+    ],
     id: null
   },
   featured: [
@@ -116,6 +155,41 @@ const mutations = {
   },
   setStartupIndustry(state, data) {
     state.startupindustries = data
+  },
+  setStartupDetail(state, data) {
+    state.startupdetail = data
+  },
+  setStartupData(state, payload) {
+    state[payload.ob] = payload.payload
+  },
+  setCofounder(state) {
+    const data = {
+      name: null,
+      email: null,
+      cofounder_role_id: 1
+    }
+    state.cofounderdetail.cofounders.push(data)
+  },
+  removeCofounder(state) {
+    if (state.cofounderdetail.cofounders.length > 1) {
+      state.cofounderdetail.cofounders.pop()
+    } else {
+      alert('You must have atleast one co-founder for your startup')
+    }
+  },
+  setTeam(state) {
+    const data = {
+      name: null,
+      business_team_id: 1
+    }
+    state.teamdetail.startup_teams.push(data)
+  },
+  removeTeam(state) {
+    if (state.teamdetail.startup_teams.length > 1) {
+      state.teamdetail.startup_teams.pop()
+    } else {
+      alert('You must have atleast one team for your startup')
+    }
   },
   setSingleStartup(state, id) {
     const singleStartup = state.mystartups.find((data) => data.id === id)
@@ -214,9 +288,16 @@ const actions = {
   async getStartupData({ commit, state }) {
     try {
       const { data } = await this.$startup.getStartupData()
-      commit('setStartupTypes', data.startup_types.data)
-      commit('setStartupIndustry', data.startup_industries.data)
-      console.log(data)
+      const payload1 = {
+        ob: 'startuptypes',
+        payload: data.startup_types.data
+      }
+      const payload2 = {
+        ob: 'startupindustries',
+        payload: data.startup_industries.data
+      }
+      commit('setStartupData', payload1)
+      commit('setStartupData', payload2)
     } catch (error) {
       console.log(error.response.data.error.message)
     }
@@ -266,13 +347,128 @@ const actions = {
       payload
     }
     commit('setStartupId', detail)
+    const businessPayload = new FormData()
+    businessPayload.append('key_resourses', state.newstartup.key_resourses)
+    businessPayload.append('customer_target', state.newstartup.customer_target)
+    businessPayload.append(
+      'value_proposition',
+      state.newstartup.value_proposition
+    )
+    businessPayload.append('sales_channel', state.newstartup.sales_channel)
+    businessPayload.append('revenue_streams', state.newstartup.revenue_streams)
+    businessPayload.append('key_metrics', state.newstartup.key_metrics)
+    businessPayload.append('cost_structure', state.newstartup.cost_structure)
+    businessPayload.append(
+      'financial_file_upload',
+      state.newstartup.financial_file_upload
+    )
+    businessPayload.append(
+      'optional_file_upload',
+      state.newstartup.optional_file_upload
+    )
+
     try {
-      const { data } = await this.$startup.saveBusinessModel(
-        state.startupbusinessmodel
-      )
+      const { data } = await this.$startup.saveBusinessModel(businessPayload)
       console.log(data)
     } catch (error) {
       this._vm.$toasted.show(`Sorry ${error.response.data.error.message}`, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 3000
+      })
+    }
+  },
+
+  async getProductDetail({ commit, state }) {
+    try {
+      const { data } = await this.$startup.getProductDetail()
+      const payload = {
+        ob: 'productprogressdetail',
+        payload: data.data
+      }
+      commit('setStartupData', payload)
+    } catch (error) {
+      console.log(error.response.data.error.message)
+    }
+  },
+
+  async getCofounderDetail({ commit, state }) {
+    try {
+      const { data } = await this.$startup.getCofounderDetail()
+      const payload = {
+        ob: 'startupcofounder',
+        payload: data.data
+      }
+      commit('setStartupData', payload)
+    } catch (error) {
+      console.log(error.response.data.error.message)
+    }
+  },
+
+  async getTeamDetail({ commit, state }) {
+    try {
+      const { data } = await this.$startup.getTeamDetail()
+      const payload = {
+        ob: 'startupteam',
+        payload: data.data
+      }
+      commit('setStartupData', payload)
+    } catch (error) {
+      console.log(error.response.data.error.message)
+    }
+  },
+
+  async saveProductDetail({ commit, state }, payload) {
+    const detail = {
+      ob: 'productdetails',
+      payload
+    }
+    commit('setStartupId', detail)
+    try {
+      const { data } = await this.$startup.saveProductDetail(
+        state.productdetails
+      )
+      console.log(data)
+    } catch (error) {
+      this._vm.$toasted.show(error.response.data.error.message, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 3000
+      })
+    }
+  },
+
+  async saveCofounderDetail({ commit, state }, payload) {
+    const detail = {
+      ob: 'cofounderdetail',
+      payload
+    }
+    commit('setStartupId', detail)
+    try {
+      const { data } = await this.$startup.saveProductDetail(
+        state.cofounderdetail
+      )
+      console.log(data)
+    } catch (error) {
+      this._vm.$toasted.show(error.response.data.error.message, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 3000
+      })
+    }
+  },
+
+  async saveTeamDetail({ commit, state }, payload) {
+    const detail = {
+      ob: 'teamdetail',
+      payload
+    }
+    commit('setStartupId', detail)
+    try {
+      const { data } = await this.$startup.saveTeamDetail(state.teamdetail)
+      console.log(data)
+    } catch (error) {
+      this._vm.$toasted.show(error.response.data.error.message, {
         theme: 'toasted-primary',
         position: 'top-center',
         duration: 3000

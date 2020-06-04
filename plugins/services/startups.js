@@ -12,8 +12,16 @@ const startup = {
   getStartupData: () => {
     return axios.get('/startup/registration/data/startup_detail')
   },
+  getProductDetail: () => {
+    return axios.get('/startup/registration/data/product_detail')
+  },
+  getCofounderDetail: () => {
+    return axios.get('/startup/registration/data/cofounder_detail')
+  },
+  getTeamDetail: () => {
+    return axios.get('/startup/registration/data/startup_team')
+  },
   saveStartupDetail: (payload) => {
-    console.log(payload)
     return axios.post('/startup/startup_detail', payload)
   },
   saveContactDetail: (payload) => {
@@ -21,6 +29,15 @@ const startup = {
   },
   saveBusinessModel: (payload) => {
     return axios.post('/startup/business_model', payload)
+  },
+  saveProductDetail: (payload) => {
+    return axios.post('/startup/product_detail', payload)
+  },
+  saveCofounderDetail: (payload) => {
+    return axios.post('/startup/product_detail', payload)
+  },
+  saveTeamDetail: (payload) => {
+    return axios.post('/startup/startup_team', payload)
   }
 }
 
