@@ -61,7 +61,9 @@ const state = () => ({
     rate_of_devotion: null,
     cofounders: [
       {
-        name: `${auth.currentUser.first_name} ${auth.currentUser.last_name}`,
+        name:
+          `${auth.currentUser.first_name} ${auth.currentUser.last_name}` ||
+          null,
         email: auth.currentUser.email,
         cofounder_role_id: 1
       },
