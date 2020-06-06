@@ -1,4 +1,8 @@
-const { auth } = JSON.parse(localStorage.getItem('fondo'))
+let auth = null
+const user = JSON.parse(localStorage.getItem('fondo'))
+if (user) {
+  auth = user.user
+}
 const state = () => ({
   newstartup: {
     company_name: null,
@@ -61,10 +65,10 @@ const state = () => ({
     rate_of_devotion: null,
     cofounders: [
       {
-        name:
-          `${auth.currentUser.first_name} ${auth.currentUser.last_name}` ||
-          null,
-        email: auth.currentUser.email,
+        name: auth
+          ? `${auth.currentUser.first_name} ${auth.currentUser.last_name}`
+          : null,
+        email: auth ? auth.currentUser.email : null,
         cofounder_role_id: 1
       },
       {
