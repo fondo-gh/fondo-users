@@ -23,6 +23,9 @@ export default {
 
   async asyncData({ store }) {
     await store.dispatch('startups/getStartupData')
+    await store.dispatch('startups/getProductDetail')
+    await store.dispatch('startups/getCofounderDetail')
+    await store.dispatch('startups/getTeamDetail')
   }
 }
 </script>

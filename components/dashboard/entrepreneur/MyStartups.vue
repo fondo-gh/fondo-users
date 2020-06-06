@@ -43,11 +43,20 @@
                 </td>
                 <td>
                   <button
+                    v-if="!startup.registration_is_complete"
                     class="btn btn-default btn-xs"
                     @click="completeRegister(startup.id)"
                   >
                     Complete Registration
                   </button>
+                  <span v-else>
+                    <button
+                      @click="completeRegister(startup.id)"
+                      class="btn btn-default btn-xs"
+                    >
+                      Edit startup</button
+                    ><br /><small>Your application is in review</small></span
+                  >
                 </td>
               </tr>
             </tbody>
