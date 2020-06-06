@@ -208,6 +208,15 @@ const mutations = {
     if (singleStartup.business_model) {
       state.startupbusinessmodel = singleStartup.business_model
     }
+    if (singleStartup.product_detail) {
+      state.productdetails = singleStartup.product_detail
+    }
+    if (singleStartup.cofounder_detail) {
+      state.cofounderdetail = singleStartup.cofounder_detail
+    }
+    if (singleStartup.startup_teams) {
+      state.startupteam = singleStartup.startup_teams
+    }
 
     this.$router.push(
       `/dashboard/entrepreneur/mystartups/completeregister/${id}`
@@ -341,12 +350,7 @@ const actions = {
       })
     }
   },
-  async saveBusinessModel({ commit, state }, payload) {
-    const detail = {
-      ob: 'startupbusinessmodel',
-      payload
-    }
-    commit('setStartupId', detail)
+  async saveBusinessModel({ commit, state }, id) {
     const businessPayload = new FormData()
     businessPayload.append('key_resourses', state.newstartup.key_resourses)
     businessPayload.append('customer_target', state.newstartup.customer_target)
@@ -366,6 +370,7 @@ const actions = {
       'optional_file_upload',
       state.newstartup.optional_file_upload
     )
+    businessPayload.append('startup_id', id)
 
     try {
       const { data } = await this.$startup.saveBusinessModel(businessPayload)
@@ -445,7 +450,7 @@ const actions = {
     }
     commit('setStartupId', detail)
     try {
-      const { data } = await this.$startup.saveProductDetail(
+      const { data } = await this.$startup.saveCofounderDetail(
         state.cofounderdetail
       )
       console.log(data)

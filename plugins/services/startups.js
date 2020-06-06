@@ -28,13 +28,14 @@ const startup = {
     return axios.post('/startup/contact_detail', payload)
   },
   saveBusinessModel: (payload) => {
+    console.log(payload)
     return axios.post('/startup/business_model', payload)
   },
   saveProductDetail: (payload) => {
     return axios.post('/startup/product_detail', payload)
   },
   saveCofounderDetail: (payload) => {
-    return axios.post('/startup/product_detail', payload)
+    return axios.post('/startup/cofounder_detail', payload)
   },
   saveTeamDetail: (payload) => {
     return axios.post('/startup/startup_team', payload)
