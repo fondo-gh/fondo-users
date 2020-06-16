@@ -2,28 +2,37 @@
   <div>
     <form @submit.prevent="saveBasicData">
       <div class="col-md-12 form-input">
-        <label for="last name">Company Name </label>
+        <label for="last name"
+          >Company Name <span class="required-field">*</span>
+        </label>
         <base-input v-model="company_name" type="text" required />
       </div>
       <div class="col-md-12 form-input">
-        <label for="first name">Description of startup</label>
+        <label for="first name"
+          >Description of startup <span class="required-field">*</span></label
+        >
         <textarea v-model="caption" required></textarea>
       </div>
       <div class="col-md-12 form-input">
-        <label for="last name">How much do you want to raise? </label>
+        <label for="last name"
+          >How much do you want to raise? <span class="required-field">*</span>
+        </label>
         <base-input
           v-model="funds_to_raise"
           placeholder="eg. $200,000"
+          required
           type="text"
         />
       </div>
       <div class="col-md-12 form-input">
         <label for="last name"
           >How much time do you have to raise this amount?
+          <span class="required-field">*</span>
         </label>
         <base-input
           v-model="duration_for_raise"
           placeholder="eg. 3 months"
+          required
           type="text"
         />
       </div>
@@ -32,8 +41,8 @@
           type="button"
           class="form-button-inverse"
           @click.native="selectImage"
-          >Select Startup Image
-          <small><i>(Not more than 2MB)</i></small></base-button
+          >Select Startup Image <small><i>(Not more than 2MB)</i></small>
+          <span class="required-field">*</span></base-button
         >
         <input
           type="file"
@@ -83,7 +92,11 @@ export default {
     },
     saveBasicData() {
       if (!this.file) {
-        alert('You have to upload an image for your startup')
+        this.$toasted.show('You have to upload an image for your startup', {
+          theme: 'toasted-primary',
+          position: 'top-center',
+          duration: 3000
+        })
       } else {
         this.$store.dispatch('startups/createBasicStartup')
       }

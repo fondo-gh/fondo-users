@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="col-md-12 form-input">
-      <label for="last name">Which stage is your product? </label>
+      <label for="last name"
+        >Which stage is your product? <span class="required-field">*</span>
+      </label>
       <base-select
         v-model="product_progress_id"
         :data="productprogressdetail"

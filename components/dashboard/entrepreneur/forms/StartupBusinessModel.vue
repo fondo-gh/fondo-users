@@ -66,11 +66,13 @@
           class="form-button-inverse"
           @click.native="selectFile('financialFile')"
           >Upload Your Financial File (pdf, word, excel)
-          <small><i>(Not more than 5MB)</i></small> <br />
+          <small><i>(Not more than 5MB)</i> </small>
+          <br />
           <small
             >(This should contain your expenses,revenue,gross profit and net
             profit)</small
-          ></base-button
+          >
+          <span class="required-field">*</span></base-button
         >
         <input
           type="file"
@@ -148,7 +150,7 @@ export default {
       this.financialFile.url = event.target.files[0].name
       const payload = {
         file: event.target.files[0],
-        type: 'financial_file'
+        type: 'financial_file_upload'
       }
       this.$store.commit('startups/setFile', payload)
       if (file.size > 5000000) {

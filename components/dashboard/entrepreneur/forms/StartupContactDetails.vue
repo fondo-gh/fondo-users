@@ -4,12 +4,14 @@
       <div class="col-md-12 form-input">
         <label for="last name"
           >What is the official email for your startup?
+          <span class="required-field">*</span>
         </label>
         <base-input v-model="email" type="email" required />
       </div>
       <div class="col-md-12 form-input">
         <label for="last name"
           >Which telephone number can we reach you on?
+          <span class="required-field">*</span>
         </label>
         <base-input
           v-model="phone"

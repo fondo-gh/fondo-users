@@ -1,12 +1,15 @@
 <template>
   <div>
     <div class="col-md-12 form-input">
-      <label>How much money have invested </label>
-      <base-input v-model="funding_amount" placeholder="900" type="number" />
+      <label
+        >How much money have you invested? <span class="required-field">*</span>
+      </label>
+      <base-input v-model="funding_amount" required type="number" />
     </div>
     <div class="col-md-12 form-input">
       <label
-        >What is your rate of devotion <br />
+        >What is your rate of devotion <span class="required-field">*</span>
+        <br />
         <small
           >Devotion entrepreneurs put into startup. Could be any of the
           following: Part time dedication( less than 35 hours per week), Full
@@ -17,10 +20,13 @@
         v-model="rate_of_devotion"
         placeholder="eg. Full time"
         type="text"
+        required
       />
     </div>
     <div class="col-md-12">
-      <label>Who are your cofounders?</label>
+      <label
+        >Who are your cofounders? <span class="required-field">*</span></label
+      >
       <div
         v-for="(cofounder, index) in cofounders"
         :key="index"

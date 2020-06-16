@@ -95,26 +95,40 @@ export default {
       this.$router.push({ name: 'dashboard-entrepreneur-mystartups' })
     },
     async saveType() {
+      const startuptype = this.$store.state.startups.startupdetails
+      if (
+        !startuptype.startup_type_id ||
+        !startuptype.startup_industry_id ||
+        !startuptype.business_registration_number ||
+        startuptype.has_patent === '' ||
+        startuptype.has_patent === null
+      ) {
+        this.$toasted.show(
+          'Please make sure all required fields are not empty',
+          {
+            theme: 'toasted-primary',
+            position: 'top-center',
+            duration: 3000
+          }
+        )
+        return false
+      }
       const startupId = this.$route.params.id
       await this.$store.dispatch('startups/saveType', startupId)
       return true
     },
 
     async saveContact() {
-      if (this.$store.state.startups.startupcontact.email === null) {
-        this.$toasted.show('Email field is required', {
-          theme: 'toasted-primary',
-          position: 'top-center',
-          duration: 3000
-        })
-        return false
-      }
-      if (this.$store.state.startups.startupcontact.phone === null) {
-        this.$toasted.show('Phone field is required', {
-          theme: 'toasted-primary',
-          position: 'top-center',
-          duration: 3000
-        })
+      const contact = this.$store.state.startups.startupcontact
+      if (!contact.email || !contact.phone) {
+        this.$toasted.show(
+          'Please make sure all required fields are not empty',
+          {
+            theme: 'toasted-primary',
+            position: 'top-center',
+            duration: 3000
+          }
+        )
         return false
       }
       const startupId = this.$route.params.id
@@ -123,12 +137,42 @@ export default {
     },
 
     async saveDetails() {
+      const newstartup = this.$store.state.startups.newstartup
+      if (
+        !newstartup.company_name ||
+        !newstartup.caption ||
+        !newstartup.funds_to_raise ||
+        !newstartup.duration_for_raise
+      ) {
+        this.$toasted.show(
+          'Please make sure all required fields are not empty',
+          {
+            theme: 'toasted-primary',
+            position: 'top-center',
+            duration: 3000
+          }
+        )
+        return false
+      }
       const startupId = this.$route.params.id
       await this.$store.dispatch('startups/saveDetails', startupId)
       return true
     },
 
     async saveBusiness() {
+      const bmodel = this.$store.state.startups.startupbusinessmodel
+      if (bmodel.financial_file_upload === null) {
+        this.$toasted.show(
+          'Please make sure all required fields are not empty',
+          {
+            theme: 'toasted-primary',
+            position: 'top-center',
+            duration: 3000
+          }
+        )
+        return false
+      }
+
       const startupId = this.$route.params.id
       await this.$store.dispatch('startups/saveBusinessModel', startupId)
       return true
@@ -141,6 +185,19 @@ export default {
     },
 
     async saveCofounderDetail() {
+      const cofounder = this.$store.state.startups.cofounderdetail
+      if (!cofounder.funding_amount || !cofounder.rate_of_devotion) {
+        this.$toasted.show(
+          'Please make sure all required fields are not empty',
+          {
+            theme: 'toasted-primary',
+            position: 'top-center',
+            duration: 3000
+          }
+        )
+        return false
+      }
+
       const startupId = this.$route.params.id
       await this.$store.dispatch('startups/saveCofounderDetail', startupId)
       return true

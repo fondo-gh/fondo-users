@@ -1,12 +1,15 @@
 <template>
   <div>
     <div class="col-md-12 form-input">
-      <label for="last name">What is your startup type </label>
+      <label for="last name"
+        >What is your startup type <span class="required-field">*</span>
+      </label>
       <base-select v-model="startup_type_id" :data="startuptypes" required />
     </div>
     <div class="col-md-12 form-input">
       <label for="last name"
         >Which industry suitably describes your startup?
+        <span class="required-field">*</span>
       </label>
       <base-select
         v-model="startup_industry_id"
@@ -15,7 +18,9 @@
       />
     </div>
     <div class="col-md-12 form-input">
-      <label for="last name">Does your startup has patent? </label>
+      <label for="last name"
+        >Does your startup has patent? <span class="required-field">*</span>
+      </label>
       <base-select v-model="has_patent" :data="hasPatent" required />
     </div>
     <div class="col-md-12 form-input">
@@ -27,13 +32,11 @@
       />
     </div>
     <div class="col-md-12 form-input">
-      <label for="last name">What is your business registration number?</label>
-      <base-input
-        v-model="business_registration_number"
-        placeholder="1234551"
-        type="text"
-        required
-      />
+      <label for="last name"
+        >What is your business registration number?
+        <span class="required-field">*</span></label
+      >
+      <base-input v-model="business_registration_number" type="text" required />
     </div>
   </div>
 </template>

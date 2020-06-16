@@ -7,7 +7,7 @@ const state = () => ({
   newstartup: {
     company_name: null,
     caption: null,
-    product_image_file: null,
+    product_image_file: '',
     funds_to_raise: null,
     duration_for_raise: null,
     startup_id: null,
@@ -146,6 +146,9 @@ const mutations = {
     state.mystartups = data
   },
   setImage(state, file) {
+    if (!file) {
+      state.newstartup.product_image_file = ''
+    }
     state.newstartup.product_image_file = file
   },
   toggleLoader(state, object) {
@@ -155,6 +158,19 @@ const mutations = {
   },
   setStartupId(state, payload) {
     state[payload.ob].startup_id = payload.payload
+    if (payload.ob === 'cofounderdetail') {
+      const cofounders = state.cofounderdetail.cofounders
+      for (let i = 0; i < cofounders.length; i++) {
+        if (!cofounders[i].name) cofounders.splice(i, 1)
+      }
+    }
+
+    if (payload.ob === 'teamdetail') {
+      const teams = state.teamdetail.startup_teams
+      for (let i = 0; i < teams.length; i++) {
+        if (!teams[i].name) teams.splice(i, 1)
+      }
+    }
   },
   setStartupTypes(state, data) {
     state.startuptypes = data
@@ -230,6 +246,9 @@ const mutations = {
   },
 
   setFile(state, data) {
+    if (!data.file) {
+      state.startupbusinessmodel[data.type] = null
+    }
     state.startupbusinessmodel[data.type] = data.file
   }
 }
@@ -281,7 +300,7 @@ const actions = {
       })
     }
   },
-  async saveDetails({ state }, id) {
+  async saveDetails({ state, commit }, id) {
     const payload = new FormData()
     payload.append('company_name', state.newstartup.company_name)
     payload.append('caption', state.newstartup.caption)
@@ -292,6 +311,7 @@ const actions = {
 
     try {
       await this.$startup.createBasicStartup(payload)
+      commit('setImage', null)
     } catch (error) {
       this._vm.$toasted.show(error.response.data.error.message, {
         theme: 'toasted-primary',
