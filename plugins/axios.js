@@ -18,7 +18,8 @@ const headers = {
 }
 
 const client = axios.create({
-  baseURL: 'http://fondo-app-gh.herokuapp.com/api/v1',
+  baseURL:
+    'http://fondowebapi-env.eba-d3fm6axc.us-west-2.elasticbeanstalk.com/api/v1',
   headers
 })
 
