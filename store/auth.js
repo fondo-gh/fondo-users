@@ -53,6 +53,7 @@ const actions = {
     try {
       commit('toggleLoader', 'user')
       const { data } = await this.$axios.post('/user/login', state.user)
+      console.log(data)
       commit('setCurrentUser', data.data)
       commit('setError', null)
       commit('toggleLoader', 'user')
