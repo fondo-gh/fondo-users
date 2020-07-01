@@ -26,7 +26,7 @@ jobs:
           profile-name: default
       - run:
           name: Upload file to S3
-          command: aws s3 sync ./dist/ s3://www.fondowebapp.com --delete
+          command: aws s3 sync ./dist/ s3://fondowebapp.com --delete
 workflows:
   version: 2
   build-deploy:
