@@ -14,8 +14,8 @@
       <label for="last name">Is your product online? provide a url </label>
       <base-input
         v-model="product_url"
-        placeholder="eg. example.com"
-        type="text"
+        placeholder="eg. https://example.com"
+        type="url"
       />
     </div>
   </div>

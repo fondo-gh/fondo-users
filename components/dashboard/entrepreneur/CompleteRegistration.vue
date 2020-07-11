@@ -180,6 +180,15 @@ export default {
 
     async saveProductDetail() {
       const startupId = this.$route.params.id
+      const productDetail = this.$store.state.startups.productdetails
+      if (!this.validUrl(productDetail.product_url)) {
+        this.$toasted.show('Please enter a valid product url', {
+          theme: 'toasted-primary',
+          position: 'top-center',
+          duration: 3000
+        })
+        return false
+      }
       await this.$store.dispatch('startups/saveProductDetail', startupId)
       return true
     },
@@ -206,6 +215,11 @@ export default {
       const startupId = this.$route.params.id
       await this.$store.dispatch('startups/saveTeamDetail', startupId)
       return true
+    },
+    validUrl(url) {
+      const expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
+      const regexp = new RegExp(expression)
+      return regexp.test(url)
     }
   }
 }

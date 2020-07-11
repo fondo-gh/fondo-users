@@ -2,9 +2,9 @@
   <div class="signup-content col-md-12">
     <div class="login-form-container col-md-12 ">
       <h4 class="norm-padding"><strong>SIGN UP</strong></h4>
-      <p v-if="error" class="error-box animated fadeIn">
+      <!-- <p v-if="error" class="error-box animated fadeIn">
         <span>{{ error }}</span>
-      </p>
+      </p> -->
 
       <p class="norm-padding">Check your progress in securing an investment</p>
       <br />

@@ -3,7 +3,7 @@
     <div class="service-caption">
       <h3 class="norm-padding">What we do at FONDO</h3>
       <p>
-        We help startups to be investment ready and connects them to potential
+        We help startups to be investment ready and connect them to potential
         investors acroos the globe.
       </p>
     </div>

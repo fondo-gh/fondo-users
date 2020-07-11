@@ -98,7 +98,7 @@ export default {
       this.file = event.target.files[0]
       this.$store.commit('startups/setImage', event.target.files[0])
       if (file.size > 2000000) {
-        alert('Event image cannot be more than 2MB')
+        alert('Image cannot be more than 2MB')
       } else {
         const reader = new FileReader()
         reader.onload = (e) => {

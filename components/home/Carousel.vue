@@ -9,10 +9,10 @@
         Opportunities In Africa
       </h1>
       <p>
-        we connects startups to potential <br />
+        We connects startups to potential <br />
         investors across the world.
       </p>
-      <p><nuxt-link to="/">Start Here</nuxt-link></p>
+      <p><nuxt-link to="/register">Start Here</nuxt-link></p>
     </div>
   </div>
 </template>

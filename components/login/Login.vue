@@ -2,7 +2,7 @@
   <div class="login-content col-md-12">
     <div class="login-form-container col-md-12 ">
       <h4 class="norm-padding"><strong>LOGIN</strong></h4>
-      <p v-if="error" class="error-box animated fadeIn">{{ error }}</p>
+      <!-- <p v-if="error" class="error-box animated fadeIn">{{ error }}</p> -->
       <p class="norm-padding">Check your progress in securing an investment</p>
       <br />
       <form @submit.prevent="login">

@@ -15,13 +15,13 @@ export const state = () => ({
     {
       id: 3,
       image: null,
-      title: 'Match Starups',
+      title: 'Match Startups',
       icon: 'fa fa-heart'
     },
     {
       id: 4,
       image: null,
-      title: 'Starup Profiling',
+      title: 'Startup Profiling',
       icon: 'fa fa-calender-alt'
     }
   ]
