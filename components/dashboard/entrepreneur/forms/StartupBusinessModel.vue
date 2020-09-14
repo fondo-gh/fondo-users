@@ -94,7 +94,6 @@
         <input
           type="file"
           @change="loadOtherFile"
-          accept="image/*"
           style="display: none"
           ref="otherFile"
         />
@@ -168,7 +167,7 @@ export default {
       this.otherFile.url = event.target.files[0].name
       const payload = {
         file: event.target.files[0],
-        type: 'optional_file'
+        type: 'optional_file_upload'
       }
       this.$store.commit('startups/setFile', payload)
       if (file.size > 5000000) {

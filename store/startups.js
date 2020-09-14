@@ -224,8 +224,8 @@ const mutations = {
     if (singleStartup.startup_detail) {
       state.startupdetails = singleStartup.startup_detail
     }
-    if (singleStartup.contact_details) {
-      state.startupcontact = singleStartup.contact_details
+    if (singleStartup.contact_detail) {
+      state.startupcontact = singleStartup.contact_detail
     }
     if (singleStartup.business_model) {
       state.startupbusinessmodel = singleStartup.business_model
@@ -378,23 +378,41 @@ const actions = {
   },
   async saveBusinessModel({ commit, state }, id) {
     const businessPayload = new FormData()
-    businessPayload.append('key_resourses', state.newstartup.key_resourses)
-    businessPayload.append('customer_target', state.newstartup.customer_target)
+    businessPayload.append(
+      'key_resourses',
+      state.startupbusinessmodel.key_resourses
+    )
+    businessPayload.append(
+      'customer_target',
+      state.startupbusinessmodel.customer_target
+    )
     businessPayload.append(
       'value_proposition',
-      state.newstartup.value_proposition
+      state.startupbusinessmodel.value_proposition
     )
-    businessPayload.append('sales_channel', state.newstartup.sales_channel)
-    businessPayload.append('revenue_streams', state.newstartup.revenue_streams)
-    businessPayload.append('key_metrics', state.newstartup.key_metrics)
-    businessPayload.append('cost_structure', state.newstartup.cost_structure)
+    businessPayload.append(
+      'sales_channel',
+      state.startupbusinessmodel.sales_channel
+    )
+    businessPayload.append(
+      'revenue_streams',
+      state.startupbusinessmodel.revenue_streams
+    )
+    businessPayload.append(
+      'key_metrics',
+      state.startupbusinessmodel.key_metrics
+    )
+    businessPayload.append(
+      'cost_structure',
+      state.startupbusinessmodel.cost_structure
+    )
     businessPayload.append(
       'financial_file_upload',
-      state.newstartup.financial_file_upload
+      state.startupbusinessmodel.financial_file_upload
     )
     businessPayload.append(
       'optional_file_upload',
-      state.newstartup.optional_file_upload
+      state.startupbusinessmodel.optional_file_upload
     )
     businessPayload.append('startup_id', id)
 
