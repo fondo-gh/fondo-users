@@ -26,7 +26,7 @@ export default {
     Welcome
   },
   async asyncData({ store }) {
-    await store.dispatch('startups/getAllStartups')
+    await store.dispatch('investor/getApprovedStartups')
   }
 }
 </script>

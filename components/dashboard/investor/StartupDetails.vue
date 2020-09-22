@@ -2,33 +2,19 @@
   <div>
     <div class="link-heading-text">
       <div class="col-md-12">
-        <h3><strong>One Startup</strong></h3>
+        <h3>
+          <strong>{{ featured.company_name }}</strong>
+          <small>{{ featured.startup_detail.startup_industry }}</small>
+        </h3>
+        <p>{{ featured.caption }}</p>
+      </div>
+      <div class="col-md-12 card-container">
+        <h4>
+          Interested in this startup?
+          <nuxt-link to="#">Sign an NDA to see more details</nuxt-link>
+        </h4>
       </div>
       <br />
-    </div>
-    <div class="card-container">
-      <div
-        v-for="feature in featured"
-        :key="feature.id"
-        class="col-md-3 featured-content"
-      >
-        <nuxt-link :to="{ name: 'courses-id', params: { slug: feature.slug } }">
-          <b-card
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2"
-          >
-            <b-card-text>
-              <h5>
-                <strong>{{ feature.title }}</strong>
-              </h5>
-              <small>{{ feature.location }}</small>
-            </b-card-text>
-          </b-card>
-        </nuxt-link>
-      </div>
     </div>
   </div>
 </template>
@@ -37,7 +23,7 @@ import { mapState } from 'vuex'
 export default {
   computed: {
     ...mapState({
-      featured: (state) => state.startups.featured
+      featured: (state) => state.investor.onestartup
     })
   }
 }

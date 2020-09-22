@@ -18,7 +18,7 @@ export default {
   computed: {
     ...mapState({
       user: (state) => state.auth.currentUser,
-      startups: (state) => state.startups.startups
+      startups: (state) => state.investor.approvedstartups
     })
   }
 }

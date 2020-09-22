@@ -9,21 +9,22 @@
         <nuxt-link
           :to="{
             name: 'dashboard-investor-startup-id',
-            params: { id: feature.id }
+            params: { id: feature.uuid }
           }"
         >
           <b-card
-            img-alt="Image"
+            :img-alt="feature.company_name"
             img-top
+            :img-src="feature.product_image"
             tag="article"
-            style="max-width: 20rem;"
+            style="max-width: 20rem;max-height: 20rem"
             class="mb-2"
           >
             <b-card-text>
               <h5>
-                <strong>{{ feature.title }}</strong>
+                <strong>{{ feature.company_name }}</strong>
               </h5>
-              <small>{{ feature.location }}</small>
+              <small>{{ feature.startup_detail.startup_industry }}</small>
             </b-card-text>
           </b-card>
         </nuxt-link>
@@ -36,7 +37,7 @@ import { mapState } from 'vuex'
 export default {
   computed: {
     ...mapState({
-      startups: (state) => state.startups.startups
+      startups: (state) => state.investor.approvedstartups
     })
   }
 }

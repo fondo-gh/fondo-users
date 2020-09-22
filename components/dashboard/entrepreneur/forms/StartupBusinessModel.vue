@@ -9,7 +9,7 @@
             >(Physical,intellectual and financial assets of the company)</small
           >
         </label>
-        <textarea v-model="key_resourses"></textarea>
+        <textarea v-model="key_resources"></textarea>
       </div>
       <div class="col-md-12 form-input">
         <label for="last name"
@@ -34,7 +34,7 @@
             >(How is the company intending to reach its customers?)</small
           ></label
         >
-        <textarea v-model="sales_channel"></textarea>
+        <textarea v-model="sales_channels"></textarea>
       </div>
       <div class="col-md-12 form-input">
         <label for="last name"
@@ -121,10 +121,10 @@ export default {
   },
   computed: {
     ...mapFields({
-      key_resourses: 'startups.startupbusinessmodel.key_resourses',
+      key_resources: 'startups.startupbusinessmodel.key_resources',
       customer_target: 'startups.startupbusinessmodel.customer_target',
       value_proposition: 'startups.startupbusinessmodel.value_proposition',
-      sales_channel: 'startups.startupbusinessmodel.sales_channel',
+      sales_channels: 'startups.startupbusinessmodel.sales_channels',
       revenue_streams: 'startups.startupbusinessmodel.revenue_streams',
       key_metrics: 'startups.startupbusinessmodel.key_metrics',
       cost_structure: 'startups.startupbusinessmodel.cost_structure'

@@ -6,13 +6,26 @@ const state = () => ({
     amount_invested: null,
     occupation: null,
     loader: null
-  }
+  },
+  approvedstartups: null,
+  onestartup: null
 })
 const mutations = {
   toggleLoader(state, object) {
     state[object].loader
       ? (state[object].loader = false)
       : (state[object].loader = true)
+  },
+
+  setStartupData(state, data) {
+    state.approvedstartups = data
+  },
+  setOneStartup(state, startupid) {
+    console.log(startupid)
+    const oneStartup = state.approvedstartups.find(
+      (startup) => startup.uuid === startupid
+    )
+    state.onestartup = oneStartup
   }
 }
 const actions = {
@@ -29,6 +42,15 @@ const actions = {
       this.$router.push({ name: 'dashboard-investor-startup' })
     } catch (error) {
       commit('toggleLoader', 'profile')
+    }
+  },
+  async getApprovedStartups({ commit }) {
+    try {
+      const { data } = await this.$investor.approvedStartups()
+      console.log('investor startup', data.data)
+      commit('setStartupData', data.data)
+    } catch (error) {
+      console.log(error)
     }
   }
 }

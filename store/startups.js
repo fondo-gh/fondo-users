@@ -42,10 +42,10 @@ const state = () => ({
   },
   startupbusinessmodel: {
     startup_id: null,
-    key_resourses: null,
+    key_resources: null,
     customer_target: null,
     value_proposition: null,
-    sales_channel: null,
+    sales_channels: null,
     revenue_streams: null,
     key_metrics: null,
     cost_structure: null,
@@ -378,9 +378,10 @@ const actions = {
   },
   async saveBusinessModel({ commit, state }, id) {
     const businessPayload = new FormData()
+    console.log('key resources', state.startupbusinessmodel.key_resources)
     businessPayload.append(
-      'key_resourses',
-      state.startupbusinessmodel.key_resourses
+      'key_resources',
+      state.startupbusinessmodel.key_resources
     )
     businessPayload.append(
       'customer_target',
@@ -391,8 +392,8 @@ const actions = {
       state.startupbusinessmodel.value_proposition
     )
     businessPayload.append(
-      'sales_channel',
-      state.startupbusinessmodel.sales_channel
+      'sales_channels',
+      state.startupbusinessmodel.sales_channels
     )
     businessPayload.append(
       'revenue_streams',
@@ -415,6 +416,7 @@ const actions = {
       state.startupbusinessmodel.optional_file_upload
     )
     businessPayload.append('startup_id', id)
+    console.log('get all data', businessPayload.get('sales_channels'))
 
     try {
       const { data } = await this.$startup.saveBusinessModel(businessPayload)

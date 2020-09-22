@@ -20,8 +20,9 @@ export default {
   components: {
     Startups
   },
-  async asyncData({ store }) {
-    await store.dispatch('startups/getAllStartups')
+  async asyncData({ store, route }) {
+    const startupId = route.params.id
+    await store.commit('investor/setOneStartup', startupId)
   }
 }
 </script>

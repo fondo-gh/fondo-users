@@ -8,17 +8,25 @@
         <base-investor-sidebar />
       </div>
 
-      <div class="col-md-9">
+      <div class="col-md-9 main-investor-container">
         <welcome />
+        <br />
+        <startups />
       </div>
     </div>
   </div>
 </template>
 <script>
 import Welcome from '~/components/dashboard/investor/Welcome'
+import Startups from '~/components/dashboard/investor/Startups'
+
 export default {
   components: {
-    Welcome
+    Welcome,
+    Startups
+  },
+  async asyncData({ store }) {
+    await store.dispatch('investor/getApprovedStartups')
   }
 }
 </script>
