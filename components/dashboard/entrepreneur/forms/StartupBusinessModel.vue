@@ -82,6 +82,10 @@
         />
         <span>{{ financialFile.url }}</span>
         <br />
+        <span v-if="financial_file_upload"
+          ><a :href="financial_file_upload">Preview Financial File</a></span
+        >
+        <br />
       </div>
       <div class="col-md-12 form-input">
         <base-button
@@ -99,6 +103,9 @@
         />
         <span>{{ otherFile.url }}</span>
         <br />
+        <span v-if="optional_file_upload"
+          ><a :href="optional_file_upload">Preview Optional File</a></span
+        >
       </div>
     </form>
   </div>
@@ -127,7 +134,10 @@ export default {
       sales_channels: 'startups.startupbusinessmodel.sales_channels',
       revenue_streams: 'startups.startupbusinessmodel.revenue_streams',
       key_metrics: 'startups.startupbusinessmodel.key_metrics',
-      cost_structure: 'startups.startupbusinessmodel.cost_structure'
+      cost_structure: 'startups.startupbusinessmodel.cost_structure',
+      financial_file_upload:
+        'startups.startupbusinessmodel.financial_file_upload',
+      optional_file_upload: 'startups.startupbusinessmodel.optional_file_upload'
     }),
     ...mapState({
       user: (state) => state.auth.currentUser

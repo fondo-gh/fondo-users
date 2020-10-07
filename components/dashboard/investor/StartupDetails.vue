@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <h3>
           <strong>{{ featured.company_name }}</strong>
-          <small>{{ featured.startup_detail.startup_industry }}</small>
+          <small>{{ featured.startup_industry }}</small>
         </h3>
         <p>{{ featured.caption }}</p>
       </div>

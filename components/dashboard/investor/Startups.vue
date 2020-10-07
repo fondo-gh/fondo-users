@@ -24,7 +24,7 @@
               <h5>
                 <strong>{{ feature.company_name }}</strong>
               </h5>
-              <small>{{ feature.startup_detail.startup_industry }}</small>
+              <small>{{ feature.startup_industry }}</small>
             </b-card-text>
           </b-card>
         </nuxt-link>

@@ -304,10 +304,12 @@ const actions = {
     const payload = new FormData()
     payload.append('company_name', state.newstartup.company_name)
     payload.append('caption', state.newstartup.caption)
-    payload.append('product_image_file', state.newstartup.product_image_file)
     payload.append('funds_to_raise', state.newstartup.funds_to_raise)
     payload.append('duration_for_raise', state.newstartup.duration_for_raise)
     payload.append('startup_id', id)
+    if (!checkIfImageLink(state.newstartup.product_image_file)) {
+      payload.append('product_image_file', state.newstartup.product_image_file)
+    }
 
     try {
       await this.$startup.createBasicStartup(payload)
@@ -407,14 +409,20 @@ const actions = {
       'cost_structure',
       state.startupbusinessmodel.cost_structure
     )
-    businessPayload.append(
-      'financial_file_upload',
-      state.startupbusinessmodel.financial_file_upload
-    )
-    businessPayload.append(
-      'optional_file_upload',
-      state.startupbusinessmodel.optional_file_upload
-    )
+
+    if (!checkIfFileLink(state.newstartup.product_image_file)) {
+      businessPayload.append(
+        'financial_file_upload',
+        state.startupbusinessmodel.financial_file_upload
+      )
+    }
+    if (!checkIfFileLink(state.newstartup.product_image_file)) {
+      businessPayload.append(
+        'optional_file_upload',
+        state.startupbusinessmodel.optional_file_upload
+      )
+    }
+
     businessPayload.append('startup_id', id)
     console.log('get all data', businessPayload.get('sales_channels'))
 
@@ -533,4 +541,12 @@ export default {
   state,
   actions,
   mutations
+}
+
+const checkIfImageLink = (link) => {
+  return /\.(jpg|gif|png|jpeg)$/.test(link)
+}
+
+const checkIfFileLink = (link) => {
+  return /\.(pdf|doc|docx|xlsx|xlsm|xlsb)$/.test(link)
 }
